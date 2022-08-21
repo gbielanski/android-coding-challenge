@@ -13,6 +13,8 @@ internal class GetShiftsUseCase @Inject constructor(
 ) {
 
     operator fun invoke(): Flow<List<ShiftItem>> = flow {
-        emit(shiftsRepository.getShifts())
+        emit(shiftsRepository.getShifts(null, END))
     }.flowOn(ioDispatcher)
 }
+
+private const val END = "2022-08-21T18:00:00+00:00"
