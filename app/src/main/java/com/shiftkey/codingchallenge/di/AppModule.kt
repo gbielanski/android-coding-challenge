@@ -44,4 +44,4 @@ internal class AppModule {
     fun ioDispatcher() = Dispatchers.IO
 }
 
-private const val TIMEOUT_VALUE_SECONDS = 20L
+private const val TIMEOUT_VALUE_SECONDS = 10L
