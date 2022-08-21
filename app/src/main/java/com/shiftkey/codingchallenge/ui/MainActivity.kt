@@ -12,15 +12,18 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.shiftkey.codingchallenge.R
 import com.shiftkey.codingchallenge.domain.ShiftItem
 import com.shiftkey.codingchallenge.ui.DetailsActivity.Companion.SHIFT_DETAILS
 import dagger.hilt.android.AndroidEntryPoint
+import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
-internal class MainActivity : AppCompatActivity(), ShiftClickListener {
+internal class MainActivity : AppCompatActivity(), ShiftClickListener, ShiftScrollListener {
     private lateinit var progressBar: ProgressBar
     private lateinit var recyclerView: RecyclerView
     private lateinit var errorView: TextView
@@ -33,7 +36,7 @@ internal class MainActivity : AppCompatActivity(), ShiftClickListener {
         recyclerView = findViewById(R.id.recycler)
         errorView = findViewById(R.id.error)
 
-        val shiftItemAdapter = ShiftItemAdapter(shiftClickListener = this)
+        val shiftItemAdapter = ShiftItemAdapter(itemClickListener = this, scrollListener = this)
 
         recyclerView.apply {
             layoutManager = LinearLayoutManager(this@MainActivity)
@@ -47,6 +50,8 @@ internal class MainActivity : AppCompatActivity(), ShiftClickListener {
                         progressBar.visibility = View.VISIBLE
                     } else {
                         progressBar.visibility = View.GONE
+                        shiftItemAdapter.items = state.shifts
+                        shiftItemAdapter.notifyDataSetChanged()
                     }
 
                     if (state.error.isNullOrEmpty().not()) {
@@ -57,9 +62,6 @@ internal class MainActivity : AppCompatActivity(), ShiftClickListener {
                         errorView.visibility = View.GONE
                         recyclerView.visibility = View.VISIBLE
                     }
-
-                    shiftItemAdapter.items = state.shifts
-                    shiftItemAdapter.notifyDataSetChanged()
                 }
             }
         }
@@ -72,6 +74,10 @@ internal class MainActivity : AppCompatActivity(), ShiftClickListener {
             )
         }
         startActivity(intent)
+    }
+
+    override fun onLastReached() {
+        shiftsViewModel.lastReached()
     }
 
 }

@@ -1,6 +1,5 @@
 package com.shiftkey.codingchallenge.ui
 
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.shiftkey.codingchallenge.domain.GetShiftsUseCase
@@ -18,18 +17,27 @@ internal class ShiftsViewModel @Inject constructor(
 
     init {
         viewModelScope.launch {
-            Log.d("Greg", "ShiftsViewModel")
-            getShiftsUseCase()
-                .onStart { mutableUiState.update { it.copy(isLoading = true) } }
-                .catch {
-                    Log.d("Greg", "ShiftsViewModel error")
-                    handleErrors(it) }
-                .collectLatest { items ->
-                    mutableUiState.update {
-                        it.copy(isLoading = false, error = null, shifts = items)
-                    }
-                }
+            fetchShifts()
         }
+    }
+
+    fun lastReached() {
+        viewModelScope.launch {
+            fetchShifts(uiState.value.shifts.last().startTime)
+        }
+    }
+
+    private suspend fun fetchShifts(startTime: String? = null) {
+        getShiftsUseCase(startTime)
+            .onStart { mutableUiState.update { it.copy(isLoading = true) } }
+            .catch {
+                handleErrors(it)
+            }
+            .collectLatest { items ->
+                mutableUiState.update {
+                    it.copy(isLoading = false, error = null, shifts = it.shifts + items)
+                }
+            }
     }
 
     private fun handleErrors(error: Throwable) {

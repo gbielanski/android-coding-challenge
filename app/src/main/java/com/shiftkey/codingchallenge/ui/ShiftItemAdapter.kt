@@ -12,7 +12,8 @@ import com.shiftkey.codingchallenge.domain.toComposeColor
 
 internal class ShiftItemAdapter(
     var items: List<ShiftItem> = listOf(),
-    val shiftClickListener: ShiftClickListener,
+    val itemClickListener: ShiftClickListener,
+    val scrollListener: ShiftScrollListener,
 ) :
     RecyclerView.Adapter<ShiftItemAdapter.ItemViewHolder>() {
 
@@ -25,6 +26,9 @@ internal class ShiftItemAdapter(
 
     override fun onBindViewHolder(holder: ItemViewHolder, position: Int) {
         holder.bind(items[position])
+        if (position == items.size - 1) {
+            scrollListener.onLastReached()
+        }
     }
 
     inner class ItemViewHolder(itemView: View) : RecyclerView.ViewHolder(itemView) {
@@ -35,13 +39,13 @@ internal class ShiftItemAdapter(
 
         init {
             itemView.setOnClickListener {
-                shiftClickListener.onShiftClicked(items[adapterPosition])
+                itemClickListener.onShiftClicked(items[adapterPosition])
             }
         }
 
         fun bind(item: ShiftItem) = with(itemView) {
-            startTime.text = item.startTime
-            endTime.text = item.endTime
+            startTime.text = item.normalizedStartTime
+            endTime.text = item.normalizedEndTime
             skill.text = item.skill.name
             skill.setBackgroundColor(item.skill.color.toComposeColor().toArgb())
             facility.text = item.facilityType.name

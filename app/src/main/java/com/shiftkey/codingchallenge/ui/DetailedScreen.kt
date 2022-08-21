@@ -23,8 +23,10 @@ import com.shiftkey.codingchallenge.domain.Skill
 
 private val shiftItemPreview = ShiftItem(
     shiftId = 1L,
-    startTime = "2022-08-20 19:00:00",
-    endTime = "2022-08-21 19:00:00",
+    startTime = "2022-08-20T19:00:00",
+    endTime = "2022-08-21T19:00:00",
+    normalizedStartTime = "2022-08-20 19:00:00",
+    normalizedEndTime = "2022-08-21 19:00:00",
     isPremiumRate = true,
     isCovid = true,
     kind = "Day Shift",
@@ -86,12 +88,12 @@ internal fun DetailedScreen(
                     )
                     Text(
                         modifier = modifier,
-                        text = shiftItem.startTime,
+                        text = shiftItem.normalizedStartTime,
                         fontSize = TextSize.Body.sp,
                     )
                     Text(
                         modifier = modifier,
-                        text = shiftItem.endTime,
+                        text = shiftItem.normalizedEndTime,
                         fontSize = TextSize.Body.sp,
                     )
                     Row(
