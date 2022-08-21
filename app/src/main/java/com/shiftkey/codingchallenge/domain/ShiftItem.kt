@@ -1,7 +1,10 @@
 package com.shiftkey.codingchallenge.domain
 
+import android.os.Parcelable
 import com.shiftkey.codingchallenge.data.ShiftItemDTO
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 internal data class ShiftItem(
     val shiftId: Long,
     val startTime: String,
@@ -12,7 +15,7 @@ internal data class ShiftItem(
     val skill: Skill,
     val facilityType: FacilityType,
     val localizedSpecialty: LocalizedSpecialty
-) {
+) : Parcelable {
     constructor(dto: ShiftItemDTO) : this(
         shiftId = dto.shiftId,
         startTime = dto.startTime,

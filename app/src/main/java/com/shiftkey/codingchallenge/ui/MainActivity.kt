@@ -11,6 +11,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import com.shiftkey.codingchallenge.R
 import com.shiftkey.codingchallenge.domain.ShiftItem
+import com.shiftkey.codingchallenge.ui.DetailsActivity.Companion.SHIFT_DETAILS
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
@@ -41,7 +42,12 @@ internal class MainActivity : AppCompatActivity(), ShiftClickListener {
     }
 
     override fun onShiftClicked(item: ShiftItem) {
-        val intent = Intent(this, DetailsActivity::class.java)
+        val intent = Intent(this, DetailsActivity::class.java).apply {
+            putExtra(
+                SHIFT_DETAILS, item
+
+            )
+        }
         startActivity(intent)
     }
 

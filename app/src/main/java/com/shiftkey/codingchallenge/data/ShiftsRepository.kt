@@ -16,4 +16,4 @@ internal class ShiftsRepository @Inject constructor(
 
 private const val ADDRESS = "Dallas, TX"
 private const val TYPE = "list"
-private const val START = "2022-08-20T15:00:00+00:00"
+private const val START = "2022-08-20T18:00:00+00:00"

@@ -1,14 +1,18 @@
 package com.shiftkey.codingchallenge.domain
 
+import android.os.Parcel
+import android.os.Parcelable
 import androidx.compose.ui.graphics.Color
 import com.shiftkey.codingchallenge.data.LocalizedSpecialtyDTO
 import com.shiftkey.codingchallenge.data.SpecialtyDTO
+import kotlinx.parcelize.Parcelize
 
+@Parcelize
 internal data class LocalizedSpecialty(
     val name: String,
     val abbreviation: String,
     val specialty: Specialty
-) {
+) : Parcelable {
     constructor(dto: LocalizedSpecialtyDTO) : this(
         name = dto.name,
         abbreviation = dto.abbreviation,
@@ -18,14 +22,15 @@ internal data class LocalizedSpecialty(
     )
 }
 
+@Parcelize
 internal data class Specialty(
     val name: String,
     val abbreviation: String,
-    val color: Color,
-) {
+    val color: String,
+) : Parcelable {
     constructor(dto: SpecialtyDTO) : this(
         name = dto.name,
         abbreviation = dto.abbreviation,
-        color = dto.color.toComposeColor(),
+        color = dto.color,
     )
 }

@@ -8,6 +8,7 @@ import androidx.compose.ui.graphics.toArgb
 import androidx.recyclerview.widget.RecyclerView
 import com.shiftkey.codingchallenge.R
 import com.shiftkey.codingchallenge.domain.ShiftItem
+import com.shiftkey.codingchallenge.domain.toComposeColor
 
 internal class ShiftItemAdapter(
     var items: List<ShiftItem> = listOf(),
@@ -42,10 +43,10 @@ internal class ShiftItemAdapter(
             startTime.text = item.startTime
             endTime.text = item.endTime
             skill.text = item.skill.name
-            skill.setBackgroundColor(item.skill.color.toArgb())
+            skill.setBackgroundColor(item.skill.color.toComposeColor().toArgb())
             facility.text = item.facilityType.name
-            facility.setBackgroundColor(item.facilityType.color.toArgb())
-            setBackgroundColor(item.facilityType.color.toArgb())
+            facility.setBackgroundColor(item.facilityType.color.toComposeColor().toArgb())
+            setBackgroundColor(item.facilityType.color.toComposeColor().toArgb())
         }
 
     }
