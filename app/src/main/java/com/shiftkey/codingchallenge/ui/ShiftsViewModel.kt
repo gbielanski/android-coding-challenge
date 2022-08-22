@@ -34,8 +34,14 @@ internal class ShiftsViewModel @Inject constructor(
                 handleErrors(it)
             }
             .collectLatest { items ->
-                mutableUiState.update {
-                    it.copy(isLoading = false, error = null, shifts = it.shifts + items)
+                if ((mutableUiState.value.shifts + items).isEmpty()) {
+                    mutableUiState.update {
+                        it.copy(isLoading = false, error = "No shifts available")
+                    }
+                } else {
+                    mutableUiState.update {
+                        it.copy(isLoading = false, error = null, shifts = it.shifts + items)
+                    }
                 }
             }
     }

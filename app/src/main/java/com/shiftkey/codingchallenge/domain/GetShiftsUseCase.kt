@@ -12,7 +12,9 @@ internal class GetShiftsUseCase @Inject constructor(
     private val ioDispatcher: CoroutineDispatcher,
 ) {
 
-    operator fun invoke(startDay: String? = null): Flow<List<ShiftItem>> = flow {
-        emit(shiftsRepository.getShifts(startDay))
-    }.flowOn(ioDispatcher)
+    operator fun invoke(startDay: String? = null): Flow<List<ShiftItem>> {
+        return flow {
+            emit(shiftsRepository.getShifts(startDay))
+        }.flowOn(ioDispatcher)
+    }
 }
