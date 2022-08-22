@@ -33,6 +33,4 @@ internal class ShiftsViewModelTest {
             getShiftsUseCase.invoke(any())
         }
     }
-
-    // etc
 }

@@ -10,7 +10,7 @@ class DetailsActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         val shiftItem = intent.extras?.get(SHIFT_DETAILS) as ShiftItem
         setContent {
-            DetailedScreen(shiftItem = shiftItem, onButtonClicked = {
+            DetailedScreen(screenState = shiftItem, onButtonClicked = {
                 finish()
             })
         }

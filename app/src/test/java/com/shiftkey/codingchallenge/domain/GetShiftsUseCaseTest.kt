@@ -30,6 +30,4 @@ internal class GetShiftsUseCaseTest {
             shiftsRepository.getShifts(startDate)
         }
     }
-
-    //etc
 }

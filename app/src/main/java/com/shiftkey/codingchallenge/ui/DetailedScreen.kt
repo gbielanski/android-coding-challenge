@@ -53,14 +53,14 @@ private val shiftItemPreview = ShiftItem(
 @Composable
 fun DetailedScreenPreview() {
     DetailedScreen(
-        shiftItem = shiftItemPreview,
+        screenState = shiftItemPreview,
         onButtonClicked = {}
     )
 }
 
 @Composable
 internal fun DetailedScreen(
-    shiftItem: ShiftItem,
+    screenState: ShiftItem,
     onButtonClicked: () -> Unit,
     modifier: Modifier = Modifier.padding(
         horizontal = MarginSize.Large.dp,
@@ -72,7 +72,7 @@ internal fun DetailedScreen(
             Column(
                 modifier = Modifier
                     .fillMaxWidth()
-                    .background(shiftItem.facilityType.color.toComposeColor())
+                    .background(screenState.facilityType.color.toComposeColor())
             ) {
                 Column(
                     modifier = Modifier.weight(1f),
@@ -83,29 +83,29 @@ internal fun DetailedScreen(
                             horizontal = MarginSize.Large.dp,
                             vertical = MarginSize.Large.dp,
                         ),
-                        text = shiftItem.facilityType.name,
+                        text = screenState.facilityType.name,
                         fontSize = TextSize.Title.sp,
                     )
                     Text(
                         modifier = modifier,
-                        text = shiftItem.normalizedStartTime,
+                        text = screenState.normalizedStartTime,
                         fontSize = TextSize.Body.sp,
                     )
                     Text(
                         modifier = modifier,
-                        text = shiftItem.normalizedEndTime,
+                        text = screenState.normalizedEndTime,
                         fontSize = TextSize.Body.sp,
                     )
                     Row(
                         modifier = Modifier
                             .fillMaxWidth()
                             .background(
-                                shiftItem.skill.color.toComposeColor()
+                                screenState.skill.color.toComposeColor()
                             ),
                         horizontalArrangement = Arrangement.Center,
                     ) {
                         Text(
-                            text = shiftItem.skill.name,
+                            text = screenState.skill.name,
                             fontSize = TextSize.Highlighted.sp,
                         )
                     }
@@ -114,26 +114,26 @@ internal fun DetailedScreen(
                         horizontalArrangement = Arrangement.spacedBy(MarginSize.Medium.dp)
                     ) {
                         Text(
-                            text = shiftItem.kind
+                            text = screenState.kind
                         )
                         Row(
                         ) {
                             Text(text = stringResource(R.string.covid))
-                            Icon(getIcon(shiftItem.isCovid), contentDescription = "")
+                            Icon(getIcon(screenState.isCovid), contentDescription = "")
 
                         }
                         Row {
                             Text(text = stringResource(R.string.premium))
-                            Icon(getIcon(shiftItem.isPremiumRate), contentDescription = "")
+                            Icon(getIcon(screenState.isPremiumRate), contentDescription = "")
                         }
                     }
                     Box(
                         modifier = modifier
-                            .background(shiftItem.localizedSpecialty.specialty.color.toComposeColor())
+                            .background(screenState.localizedSpecialty.specialty.color.toComposeColor())
                     ) {
                         Text(
                             modifier = modifier,
-                            text = shiftItem.localizedSpecialty.name,
+                            text = screenState.localizedSpecialty.name,
                             fontSize = TextSize.Highlighted.sp,
                         )
                     }
