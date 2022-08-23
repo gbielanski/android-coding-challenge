@@ -21,7 +21,6 @@ internal data class ShiftItemDTO(
     val isCovid: Boolean,
     @SerializedName("shift_kind")
     val kind: String,
-    @SerializedName("skill")
     val skill: SkillDTO,
     @SerializedName("facility_type")
     val facility: FacilityTypeDTO,
