@@ -1,8 +1,6 @@
 package com.shiftkey.codingchallenge.domain
 
-import android.os.Parcel
 import android.os.Parcelable
-import androidx.compose.ui.graphics.Color
 import com.shiftkey.codingchallenge.data.LocalizedSpecialtyDTO
 import com.shiftkey.codingchallenge.data.SpecialtyDTO
 import kotlinx.parcelize.Parcelize

@@ -12,15 +12,12 @@ import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import androidx.recyclerview.widget.RecyclerView.SCROLL_STATE_IDLE
 import com.shiftkey.codingchallenge.R
 import com.shiftkey.codingchallenge.domain.ShiftItem
 import com.shiftkey.codingchallenge.ui.DetailsActivity.Companion.SHIFT_DETAILS
 import dagger.hilt.android.AndroidEntryPoint
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.flow.collectLatest
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
 
 @AndroidEntryPoint
 internal class MainActivity : AppCompatActivity(), ShiftClickListener, ShiftScrollListener {

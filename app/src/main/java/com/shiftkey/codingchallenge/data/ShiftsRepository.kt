@@ -7,11 +7,11 @@ import javax.inject.Inject
 internal class ShiftsRepository @Inject constructor(
     private val shiftsApi: ShiftsApi
 ) {
-    suspend fun getShifts(startDay: String?): List<ShiftItem> {
-        val start = if (startDay.isNullOrEmpty()) {
+    suspend fun getShifts(referenceDate: String?): List<ShiftItem> {
+        val start = if (referenceDate.isNullOrEmpty()) {
             getCurrentDayTime()
         } else {
-            getEndOfTheWeek(startDay.toLocalDateTime()).plusMinutes(1)
+            beginningOfNextWeek(referenceDate)
         }
 
         val end = getEndOfTheWeek(start)
@@ -26,7 +26,10 @@ internal class ShiftsRepository @Inject constructor(
         }
     }
 
-    private fun String.toLocalDateTime(): LocalDateTime {
+    private fun beginningOfNextWeek(startDay: String) =
+        getEndOfTheWeek(startDay.toDateTimeString()).plusMinutes(1)
+
+    private fun String.toDateTimeString(): LocalDateTime {
         return LocalDateTime.parse(
             if (contains("+")) {
                 substring(0, indexOf("+"))
