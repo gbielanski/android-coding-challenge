@@ -17,8 +17,10 @@ internal data class ShiftItem(
     val skill: Skill,
     val facilityType: FacilityType,
     val localizedSpecialty: LocalizedSpecialty
-) : Parcelable {
-    constructor(dto: ShiftItemDTO) : this(
+) : Parcelable
+
+internal fun shiftItemOf(dto: ShiftItemDTO): ShiftItem {
+    return ShiftItem(
         shiftId = dto.shiftId,
         startTime = dto.startTime,
         endTime = dto.endTime,
@@ -27,14 +29,16 @@ internal data class ShiftItem(
         isPremiumRate = dto.isPremiumRate,
         isCovid = dto.isCovid,
         kind = dto.kind,
-        skill = Skill(
+        skill = skillOf(
             dto.skill
         ),
-        facilityType = FacilityType(
+        facilityType = facilityTypeOf(
             dto.facility
         ),
-        localizedSpecialty = LocalizedSpecialty(
+        localizedSpecialty = localizedSpecialtyOf(
             dto.localizedSpecialty
         )
     )
 }
+
+internal typealias ShiftItemMapper = @JvmSuppressWildcards (dto: ShiftItemDTO) -> ShiftItem

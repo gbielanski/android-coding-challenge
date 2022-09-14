@@ -18,7 +18,7 @@ internal class GetShiftsUseCaseTest {
     @OptIn(ExperimentalCoroutinesApi::class)
     @Test
     fun `get shifts should get shifts from repository`() = runTest {
-        val startDate = "someDate"
+        val startDate = "2018-12-14T09:55:00"
         val useCase = GetShiftsUseCase(
             shiftsRepository = shiftsRepository,
             ioDispatcher = coroutineDispatcher
@@ -27,7 +27,7 @@ internal class GetShiftsUseCaseTest {
         useCase.invoke(startDate).collect(relaxedMockk())
 
         coVerify {
-            shiftsRepository.getShifts(startDate)
+            shiftsRepository.getShifts(any(), any())
         }
     }
 }

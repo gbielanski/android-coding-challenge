@@ -1,6 +1,8 @@
 package com.shiftkey.codingchallenge.di
 
 import com.shiftkey.codingchallenge.data.ShiftsApi
+import com.shiftkey.codingchallenge.domain.ShiftItemMapper
+import com.shiftkey.codingchallenge.domain.shiftItemOf
 import dagger.Module
 import dagger.Provides
 import dagger.hilt.InstallIn
@@ -42,6 +44,9 @@ internal class AppModule {
 
     @Provides
     fun ioDispatcher() = Dispatchers.IO
+
+    @Provides
+    fun shiftItemMapper(): ShiftItemMapper = ::shiftItemOf
 }
 
 private const val TIMEOUT_VALUE_SECONDS = 10L

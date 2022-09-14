@@ -8,9 +8,9 @@ import kotlinx.parcelize.Parcelize
 internal data class FacilityType(
     val name: String,
     val color: String,
-) : Parcelable {
-    constructor(dto: FacilityTypeDTO) : this(
-        dto.name,
-        dto.color
-    )
-}
+) : Parcelable
+
+internal fun facilityTypeOf(dto: FacilityTypeDTO) = FacilityType(
+    dto.name,
+    dto.color
+)

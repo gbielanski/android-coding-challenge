@@ -10,25 +10,25 @@ internal data class LocalizedSpecialty(
     val name: String,
     val abbreviation: String,
     val specialty: Specialty
-) : Parcelable {
-    constructor(dto: LocalizedSpecialtyDTO) : this(
-        name = dto.name,
-        abbreviation = dto.abbreviation,
-        specialty = Specialty(
-            dto.specialty
-        )
+) : Parcelable
+
+internal fun localizedSpecialtyOf(dto: LocalizedSpecialtyDTO) = LocalizedSpecialty(
+    name = dto.name,
+    abbreviation = dto.abbreviation,
+    specialty = specialtyOf(
+        dto.specialty
     )
-}
+)
 
 @Parcelize
 internal data class Specialty(
     val name: String,
     val abbreviation: String,
     val color: String,
-) : Parcelable {
-    constructor(dto: SpecialtyDTO) : this(
-        name = dto.name,
-        abbreviation = dto.abbreviation,
-        color = dto.color,
-    )
-}
+) : Parcelable
+
+internal fun specialtyOf(dto: SpecialtyDTO) = Specialty(
+    name = dto.name,
+    abbreviation = dto.abbreviation,
+    color = dto.color,
+)

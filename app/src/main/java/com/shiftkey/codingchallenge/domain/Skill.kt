@@ -8,9 +8,9 @@ import kotlinx.parcelize.Parcelize
 internal data class Skill(
     val name: String,
     val color: String,
-) : Parcelable {
-    constructor(dto: SkillDTO) : this(
-        dto.name,
-        dto.color
-    )
-}
+) : Parcelable
+
+internal fun skillOf(dto: SkillDTO) = Skill(
+    dto.name,
+    dto.color
+)
